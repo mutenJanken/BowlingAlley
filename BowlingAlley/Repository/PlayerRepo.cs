@@ -9,33 +9,33 @@ namespace BowlingAlley.Repository
 
     public class PlayerRepo
     {
-        private readonly BowlingAlleyDataContext _dataContext;
-        public PlayerRepo(BowlingAlleyDataContext dataContext)
+        private readonly BowlingAlleyDataContext _dbContext;
+        public PlayerRepo(BowlingAlleyDataContext dbContext)
         {
-            _dataContext = dataContext;
+            _dbContext = dbContext;
         }
 
         public void AddPlayer(Player playerName)
         {
-            _dataContext.Players.Add(playerName);
-            _dataContext.SaveChanges();
+            _dbContext.Players.Add(playerName);
+            _dbContext.SaveChanges();
         }
 
         public List<Player> GetPlayers()
         {
-            return _dataContext.Players.ToList();
+            return _dbContext.Players.ToList();
         }
 
         public void UpdatePlayerScore(Player player)
         {
-            _dataContext.Players.Update(player);
-            _dataContext.SaveChanges();
+            _dbContext.Players.Update(player);
+            _dbContext.SaveChanges();
         }
        
         public void DeletePlayers()
         {
-            _dataContext.Players.RemoveRange(_dataContext.Players);
-            _dataContext.SaveChanges();
+            _dbContext.Players.RemoveRange(_dbContext.Players);
+            _dbContext.SaveChanges();
         }
     }
 }

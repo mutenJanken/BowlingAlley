@@ -20,9 +20,9 @@ namespace BowlingAlley.Facades
     public class GameFacade
     {
         private readonly PlayerService _playerService;
-        public GameFacade(string connString)
+        public GameFacade(PlayerService playerService)
         {
-            _playerService = new PlayerService(connString);
+            _playerService = playerService;
         }
 
         public void ShowGameMenu()
@@ -63,20 +63,24 @@ namespace BowlingAlley.Facades
         public void Play()
         {
             var players = _playerService.GetAvaliablePlayers();
+            // Är players mindre än 2
             if (_playerService.VerifyPlayersCount())
             {
                 ConsoleAlerts.Error("Not Enough players, try adding player.");
             }
             else
             {
+                // Sätter vilken strategi som ska användas.
                 ScoreContext scoreContext = new();
                 scoreContext.SetScoreStrategy(new RandomScoreStrategy());
 
+                // Loopar igenom players och sätter ett score för varje spelare
                 foreach (var player in players)
                 {
                     player.Score = scoreContext.CalculateScore();
                     _playerService.UpdatePlayerScore(player);
                 }
+                // Kollar vem som vunnit och förlorat.
                 EvaluateGameOutcome(players);
             }
         }

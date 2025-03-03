@@ -2,7 +2,6 @@
 using BowlingAlley.Repository;
 using BowlingAlley.Singleton;
 using BowlingAlley.Utilities;
-using Microsoft.EntityFrameworkCore;
 
 namespace BowlingAlley.Services
 {
@@ -16,12 +15,9 @@ namespace BowlingAlley.Services
 
         private readonly PlayerRepo _playerRepo;
 
-        public PlayerService(string connString)
+        public PlayerService(PlayerRepo playerRepo)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<BowlingAlleyDataContext>();
-            optionsBuilder.UseSqlServer(connString);
-            var context = new BowlingAlleyDataContext(optionsBuilder.Options);
-            _playerRepo = new PlayerRepo(context);
+            _playerRepo = playerRepo;
         }
                 
         public void AddPlayer()

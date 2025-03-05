@@ -78,6 +78,7 @@ namespace BowlingAlley.Facades
                 foreach (var player in players)
                 {
                     player.Score = scoreContext.CalculateScore();
+                    // Uppdaterar spelar poäng i DB
                     _playerService.UpdatePlayerScore(player);
                 }
                 // Kollar vem som vunnit och förlorat.

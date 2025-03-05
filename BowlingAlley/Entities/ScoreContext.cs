@@ -10,16 +10,16 @@ namespace BowlingAlley.Entities
     // som då skulle kunna skapa instanser av strategi klasser.
     public class ScoreContext : IScore
     {
-        private IScore? _playerScore;
+        private IScore _scoreStrategy;
 
-        public void SetScoreStrategy(IScore playerScore)
+        public void SetScoreStrategy(IScore scoreStrategy)
         {
-            _playerScore = playerScore;   
+            _scoreStrategy = scoreStrategy;   
         }
 
         public int CalculateScore()
         {
-            return _playerScore?.CalculateScore() ?? 0;
+            return _scoreStrategy.CalculateScore();
         }
     }
 }

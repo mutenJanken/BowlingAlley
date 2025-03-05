@@ -23,8 +23,9 @@ namespace BowlingAlley.Services
         public void AddPlayer()
         {
             bool isRunning = true;
+            // när fullGrpCounter blir 2 stängs loopen
             int fullGroupCounter = 0;
-
+            // Kontrollerar att det inte redan finns 2 spelare
             if (!VerifyPlayersCount())
             {
                 ConsoleAlerts.Error("Players already added.");
@@ -41,6 +42,7 @@ namespace BowlingAlley.Services
                 }
                 else
                 {
+                    // skapar en spelare och skickar spelare till PlayerRepo
                     var player = new Player(playerName);
                     _playerRepo.AddPlayer(player);
 
@@ -68,13 +70,13 @@ namespace BowlingAlley.Services
 
         public void DeletePlayers()
         {
-            _playerRepo.DeletePlayers();
 
             var players = _playerRepo.GetPlayers();
             foreach(Player player in players)
             {
                 Logger.Instance.Log($"DELETED Player: ({player.Name}) from DB: T-SQL(BowlingAlleyDb)");
             }
+            _playerRepo.DeletePlayers();
         }
 
         public bool VerifyPlayersCount()

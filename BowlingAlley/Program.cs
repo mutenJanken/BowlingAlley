@@ -18,6 +18,6 @@ namespace BowlingAlley
             GameFacade gameFacade = new(playerService);
 
             gameFacade.ShowGameMenu();
-        }
+         }
     }
 }
